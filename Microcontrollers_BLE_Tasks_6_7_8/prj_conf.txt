@@ -1,0 +1,52 @@
+# Stack is increased because Bluetooth settings and services may use background work.
+# Without enough stack, some BLE examples can behave unstable.
+CONFIG_SYSTEM_WORKQUEUE_STACK_SIZE=2048
+
+# Main Bluetooth support in Zephyr.
+CONFIG_BT=y
+
+# Logging/debug output, useful when checking init and advertising messages.
+CONFIG_LOG=y
+
+# Security Manager Protocol.
+# Needed because this sample also has pairing/security related parts.
+CONFIG_BT_SMP=y
+
+# Our board works as peripheral: it advertises, then phone/central connects to it.
+CONFIG_BT_PERIPHERAL=y
+
+# Standard BLE services used in the sample.
+# These are the services we later see in nRF Connect after connection.
+CONFIG_BT_DIS=y
+CONFIG_BT_BAS=y
+CONFIG_BT_HRS=y
+CONFIG_BT_IAS=y
+CONFIG_BT_CTS=y
+CONFIG_BT_CTS_HELPER_API=y
+
+# Allows prepared ATT writes for some GATT operations.
+CONFIG_BT_ATT_PREPARE_COUNT=5
+
+# Privacy support for BLE address handling.
+CONFIG_BT_PRIVACY=y
+
+# This is the visible name in scanner / scan response.
+CONFIG_BT_DEVICE_NAME="My_nRF52840"
+
+# Appearance value used by the sample, so scanner can classify the device type.
+CONFIG_BT_DEVICE_APPEARANCE=833
+
+# Allows longer/dynamic device name handling.
+CONFIG_BT_DEVICE_NAME_DYNAMIC=y
+CONFIG_BT_DEVICE_NAME_MAX=65
+
+# Bluetooth settings storage.
+# This is why settings_load() is called in bt_ready().
+CONFIG_BT_KEYS_OVERWRITE_OLDEST=y
+CONFIG_BT_SETTINGS=y
+
+# Storage backend needed for saving Bluetooth settings.
+CONFIG_FLASH=y
+CONFIG_FLASH_MAP=y
+CONFIG_NVS=y
+CONFIG_SETTINGS=y
