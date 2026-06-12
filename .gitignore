@@ -1,0 +1,31 @@
+# STM32CubeIDE / Eclipse
+Debug/
+Release/
+.metadata/
+.settings/
+*.launch
+*.list
+*.map
+
+# Build artifacts
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.su
+*.d
+
+# Arduino IDE
+*.ino.elf
+*.ino.hex
+*.ino.bin
+build/
+
+# nRF Connect SDK / Zephyr
+build*/
+*.uf2
+
+# OS files
+.DS_Store
+Thumbs.db

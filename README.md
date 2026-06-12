@@ -1,11 +1,33 @@
 # Microcontrollers: Interface and Programming
 
+![STM32](https://img.shields.io/badge/MCU-STM32%20Nucleo--F401RE-blue)
+![Arduino](https://img.shields.io/badge/Board-Arduino%20Uno-teal)
+![nRF52840](https://img.shields.io/badge/BLE-nRF52840%20DK-purple)
+![Zephyr](https://img.shields.io/badge/RTOS-Zephyr-darkred)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 This repository contains my lab work for **Microcontrollers: Interface & Programming**, covering both STM32-based embedded programming and Bluetooth Low Energy work on the nRF52840 DK.
 
 **Student:** Sardar Ziyatkhanov
 **Student ID:** P000017499
 
+<p align="center">
+  <img src="Lab1_Flashing_LED/images/Pasted image 20260320183154.png" alt="STM32 Nucleo board with external LED on breadboard" width="350">
+</p>
+
 Throughout the course, the labs moved from basic GPIO control and low-power STM32 operation to UART communication and BLE advertising/connection testing. The main platforms used were the **STM32 Nucleo-F401RE**, **Arduino Uno**, and **Nordic nRF52840 DK**.
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Hardware / Tools Used](#hardware--tools-used)
+- [Labs Included](#labs-included)
+- [Repository Structure](#repository-structure)
+- [What This Repository Shows](#what-this-repository-shows)
+- [Notes](#notes)
+- [License](#license)
 
 ---
 
@@ -54,134 +76,14 @@ The repository includes work with:
 
 ## Labs Included
 
-### Lab 1 - Flashing LED
-
-A basic GPIO lab where an external LED was connected to the STM32 Nucleo-F401RE and toggled with a visible delay.
-
-**Main ideas:**
-
-- configuring GPIO output in CubeMX
-- using `HAL_GPIO_TogglePin()`
-- understanding STM32 port/pin mapping
-- checking LED timing with oscilloscope
-- comparing code behavior with real waveform behavior
-
----
-
-### Lab 2 - Battery Life Estimation with Sleep Mode
-
-A low-power lab where the STM32 periodically activates a buzzer and spends the rest of the cycle in **Sleep mode**.
-
-**Main ideas:**
-
-- replacing busy-wait delay with **TIM2 interrupt**
-- using `__WFI()` for low-power waiting
-- configuring timer period using prescaler and auto-reload values
-- measuring active and idle current
-- calculating average current
-- estimating battery lifetime from measured values
-
----
-
-### Lab 3A - Stop Mode
-
-A low-power lab demonstrating **Stop mode**, where the MCU wakes from an interrupt and keeps SRAM content.
-
-**Main ideas:**
-
-- using onboard button as wake-up source
-- configuring `PC13` as external interrupt
-- entering Stop mode with `HAL_PWR_EnterSTOPMode()`
-- suspending and resuming SysTick
-- restoring system clock after wake-up
-- proving memory retention using a wake counter
-
----
-
-### Lab 3B - Standby Mode
-
-A continuation of the low-power task, showing how **Standby mode** differs from Stop mode.
-
-**Main ideas:**
-
-- using dedicated wake-up pin
-- checking standby wake-up flag
-- understanding reset-after-wake behavior
-- showing that volatile SRAM state is lost
-- comparing Stop mode and Standby mode practically
-- using LED blink pattern to indicate reset/wake-up behavior
-
----
-
-### Lab 4 - UART Communication with Arduino
-
-A communication lab where STM32 wakes periodically, requests button count data from Arduino over UART, logs it to PC, and returns to low-power mode.
-
-**Main ideas:**
-
-- UART communication between STM32 and Arduino
-- crossing TX and RX lines correctly
-- using USART1 for STM32-Arduino communication
-- using USART2 for STM32-PC serial logging
-- RTC wake-up every 10 seconds
-- requesting data with a `?` character
-- logging timestamp and count in CSV-style format
-- returning STM32 to Stop mode after each transaction
-
----
-
-### Task 6 - nRF52840 DK Overview and BLE Advertising Setup
-
-A BLE-focused task where the nRF52840 DK was studied and prepared as a BLE advertising device.
-
-**Main ideas:**
-
-- understanding nRF52840 DK hardware
-- BLE advertising channels 37, 38, and 39
-- advertising interval and power trade-off
-- setting up nRF Connect SDK in VS Code
-- selecting correct board target: `nrf52840dk_nrf52840`
-- building and flashing a BLE sample
-- verifying that the board can advertise without extra wiring
-
----
-
-### Task 7 - BLE Project Build, Connection Verification, and Code Analysis
-
-A practical BLE task where the board was detected and connected using the nRF Connect mobile app.
-
-**Main ideas:**
-
-- checking BLE advertising before connection
-- observing device name, RSSI, MAC address, advertised services, and connectability
-- connecting from phone to board
-- opening the GATT server after connection
-- observing standard services such as Heart Rate, Battery, Current Time, and Device Information
-- understanding `main.c`, `prj.conf`, `bt_enable()`, `bt_ready()`, and `bt_le_adv_start()`
-- testing scannable but non-connectable advertising mode
-
----
-
-### Task 8 - Device Name and Advertising Interval Modification
-
-A BLE modification task where the advertised device name and advertising interval were changed.
-
-**Main ideas:**
-
-- changing device name in `prj.conf`
-- setting `CONFIG_BT_DEVICE_NAME="My_nRF52840"`
-- changing advertising interval to 500 ms
-- calculating BLE interval units:
-
-```text
-1 BLE interval unit = 0.625 ms
-500 / 0.625 = 800
-800 decimal = 0x0320
-```
-
-- using `#define ADV_INTERVAL_500MS 0x0320`
-- passing custom advertising parameters into `BT_LE_ADV_PARAM(...)`
-- verifying the result in nRF Connect
+| Lab | Title | Summary |
+|-----|-------|---------|
+| [Lab 1](Lab1_Flashing_LED/README.md) | Flashing LED | A basic GPIO lab where an external LED was connected to the STM32 Nucleo-F401RE and toggled with a visible delay, configured via CubeMX and `HAL_GPIO_TogglePin()`, verified with an oscilloscope. |
+| [Lab 2](Lab2_Sleep_Mode_Battery_Life/README.md) | Battery Life Estimation with Sleep Mode | A low-power lab where the STM32 periodically activates a buzzer using a **TIM2 interrupt** and spends the rest of the cycle in **Sleep mode**, with current measurement used to estimate battery lifetime. |
+| [Lab 3A](Lab3A_Stop_Mode/README.md) | Stop Mode | A low-power lab demonstrating **Stop mode**, where the MCU wakes from a button interrupt, restores the system clock, and retains SRAM content (proven via a wake counter). |
+| [Lab 3B](Lab3B_Standby_Mode/README.md) | Standby Mode | A continuation of the low-power task, showing how **Standby mode** differs from Stop mode, including reset-after-wake behavior and loss of volatile SRAM state. |
+| [Lab 4](Lab4_UART_With_Arduino/README.md) | UART Communication with Arduino | A communication lab where STM32 wakes periodically, requests button count data from Arduino over UART, logs it to PC in CSV format, and returns to **Stop mode**. |
+| [BLE Tasks 6-8](Microcontrollers_BLE_Tasks_6_7_8/README.md) | nRF52840 BLE Advertising, Connection, and Modification | BLE tasks covering nRF52840 DK advertising setup, connection verification with the nRF Connect mobile app, GATT service inspection, and modifying the device name and advertising interval. |
 
 ---
 
@@ -219,3 +121,9 @@ This repository reflects my practical work in microcontroller programming, espec
 ## Notes
 
 Some folders include full project files, while others include the main source/configuration files and report evidence. For BLE tasks, the final uploaded code includes the important `main.c`, `prj.conf`, and tested `bt_ready()` variations used during the lab.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
