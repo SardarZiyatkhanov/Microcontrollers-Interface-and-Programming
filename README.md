@@ -5,6 +5,8 @@
 ![nRF52840](https://img.shields.io/badge/BLE-nRF52840%20DK-purple)
 ![Zephyr](https://img.shields.io/badge/RTOS-Zephyr-darkred)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Last Commit](https://img.shields.io/github/last-commit/SardarZiyatkhanov/Microcontrollers-Interface-and-Programming)
+![Repo Size](https://img.shields.io/github/repo-size/SardarZiyatkhanov/Microcontrollers-Interface-and-Programming)
 
 This repository contains my lab work for **Microcontrollers: Interface & Programming**, covering both STM32-based embedded programming and Bluetooth Low Energy work on the nRF52840 DK.
 
@@ -27,6 +29,7 @@ Throughout the course, the labs moved from basic GPIO control and low-power STM3
 - [Repository Structure](#repository-structure)
 - [What This Repository Shows](#what-this-repository-shows)
 - [Notes](#notes)
+- [Contributing](#contributing)
 - [License](#license)
 
 ---
@@ -121,6 +124,12 @@ This repository reflects my practical work in microcontroller programming, espec
 ## Notes
 
 Some folders include full project files, while others include the main source/configuration files and report evidence. For BLE tasks, the final uploaded code includes the important `main.c`, `prj.conf`, and tested `bt_ready()` variations used during the lab.
+
+---
+
+## Contributing
+
+This is a personal academic repository, so it isn't actively seeking code contributions. That said, if you spot an error or have a suggestion, feel free to open an issue. See [CONTRIBUTING.md](CONTRIBUTING.md) for details, including a note on academic integrity.
 
 ---
 
